@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestro Poema</title>
+  <style>
+    .poema-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(214, 51, 132, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .poema-container::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: linear-gradient(to bottom, #ff6b6b, #d63384);
+    }
+    .verso {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin: 0.8rem 0;
+      padding-left: 1rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.8s ease-out;
+      position: relative;
+    }
+    .verso.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .verso::first-letter {
+      font-weight: bold;
+      color: #d63384;
+      font-size: 1.3em;
+    }
+    @media (max-width: 600px) {
+      .poema-container {
+        padding: 1.5rem;
+      }
+      .verso {
+        font-size: 1rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="poema-container">
+    <div class="verso">Donde el tiempo se rinde a nuestro latir,</div>
+    <div class="verso">En tus ojos marrones hallo mi porvenir.</div>
+    <div class="verso">Juntos desde el séptimo, dos almas en vuelo,</div>
+    <div class="verso">Amigos primero, hoy nuestro amor es el cielo.</div>
+    <div class="verso">Mami, eres poesía hecha mujer,</div>
+    <div class="verso">Esencia divina que quiero comer.</div>
+   
+    <div class="verso">Sin miedo a lo malo, abrazando lo bueno,</div>
+    <div class="verso">Eres mi eterno "para siempre", mi dulce veneno.</div>
+    <div class="verso">Recuerdo ese chat donde todo empezó...</div>
+   
+    <div class="verso">Tus palabras fueron semillas de amor,</div>
+    <div class="verso">Un "hola" en WhatsApp que incendió mi interior.</div>
+   
+    <div class="verso">Refugio en tu cuerpo, tu risa, tu encanto,</div>
+    <div class="verso">Eres el milagro que pintó mi quebranto.</div>
+    <div class="verso">Frases tan simples, pero nos hacen volar,</div>
+    <div class="verso">Un "papi", un "mami" que nunca pasarán.</div>
+    <div class="verso">Guardamos secretos que el tiempo no apaga,</div>
+    <div class="verso">Infinito amor que ni el viento amagara.</div>
+    <div class="verso">Oh, mi destino es ser tu cobijo cada día.</div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const versos = document.querySelectorAll('.verso');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      versos.forEach(verso => observer.observe(verso));
+     
+    });
+  </script>
+</body>
+</html>
