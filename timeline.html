@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temeline</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fff0f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timeline-section {
+            margin-top: 4rem;
+            padding: 2rem 1rem;
+            background-color: #fffafc;
+            border-top: 2px solid #f8d7e6;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+
+        .timeline-section h2 {
+            color: #d63384;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .event {
+            position: relative;
+            padding: 1.5rem 1rem;
+            border-left: 3px solid #d63384;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        .event .date {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #b82e6f;
+        }
+
+        .event .dot {
+            width: 15px;
+            height: 15px;
+            background-color: #d63384;
+            border-radius: 50%;
+            position: absolute;
+            left: -9px;
+            top: 1.6rem;
+            box-shadow: 0 0 0 3px #fff;
+        }
+
+        .message {
+            background-color: #ffe6f0;
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .message:hover {
+            background-color: #ffd1e3;
+        }
+
+        .message.collapsed {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="timeline-section">
+        <h2>Nuestra historia</h2>
+        <div class="timeline">
+            <div class="event">
+                <div class="date">2020</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Todo empezó alrededor del 2020-2021 cuando decidí escribirte por WhatsApp... Estabámos cursando séptimo grado...
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">2021-2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                   Durante este tiempo, pasaron muchas cosas para ambos lados... pero siempre mantuvimos a amistad a pesar de todo... Sin dudas eras mi mejor amiga y siempre te quise a pesar de las boberias que le conté a tu madre con tal de que no descubrieran que en realidad si queria estar contigo...
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">16-17 Feb 2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Despues de tanto tiempo pude decir todo lo que sentia por ti... Que aunque la cerveza me haya ayudado un poquito a perder el miedo al rechazo... te lo tenia que decir ya cuanto antes, la verdad. De hecho además de recordar este dia como el dia en que te dije ¨Me gustas, Litzady¨, lo recuerdo porque decirtelo fue la mejor decision que he tomado en mi vida entera...
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">03 Mar 2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                  Recuerdo este dia como si fuera ayer, habiamos terminado de hablar con Rolando... un Lunes por la tarde, y pues fuimos casi todo lo que nos quedaba de esa tarde para el arbol de los deseos... nuestra primera cita oficial... la pasé demasiado bien ese dia y me sentí muy bien estando y hablando contigo ahi...
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">11 Mar 2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Nuestro primer beso... nunca pense que fuese a hacerlo pese a lo sucedido anteriormente esa semana... pero sucedió, y creeme que ha sido la mejor experiencia que tenido, y desde entonces, besarte es como un vicio, y tus labios la droga más poderosa que he visto. Sin dudas, esto es y será algo que nunca olvidaré. (Cabe destacar que desde entonces tus besos me saben a gloria...)
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">13 Mar 2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Luego de 2 dias despues del primer beso... ocurrió algo que me cambio la vida por completo. Sucedió lo que siempre soñé, y desde ese dia soy feliz. Finalmente estoy con la mujer que siempre soñé, y ahora que estoy contigo me resta hacerte feliz y amarte cada dia más... porque es lo que te mereces. TE AMO MUCHO MI AMOR ❤ ERES EL AMOR DE MI VIDA!!!!
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">Futuro</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Pasado, Presente, y Futuro. Tiempos gramaticales xdd, pero cada cual tiene su propio significado
+                    Pasado: simplemente pasó, realmente no hay nada que se pueda hacer por las cosas que hicimos, simplemente aceptarlas
+                    Presente: No es nada más que lo que vivimos, ese segundo que vives es el presente, ese regalo que tenemos todos y muchas veces no lo aprovechamos.
+                    Futuro: Es logico, es lo proximo al presente. Este tiempo es demasiado misterioso. Nadie sabe nunca que les pasará en el futuro y a veces hasta se preocupan... no es para más, Pero bueno... para mi, ese futuro lo tengo muy claro, y es estar contigo en toda su extencion. Por toda la vida y como te dije una vez, hasta que la muerte nos separe... Sabes estoy muy feliz de que mi futuro seas tu, eres lo que siempre quise... y ahora ya te tengo. De verdad, Te amo mas que a nada!!!!!!!!! 
+                    Y ahora un mensajito para el futuro: LITZADY NICOLAU EXPOSITO el dia que nos vayamos a casar, vuelve a esta pagina... quiero que observes todo lo que hemos vivido, y que en verdad sepas lo mucho que te amo ahora mismo... y espero que para ese entonces, yo ya no sea el anormal que conoces, y sea el hombre que siempre quisiste... Por ultimo, dile a Roman que lo amo(probablemente no haya nacido xd pero aqui estará esta web para que sepa mas de nosotros...)
+                </div>
+            </div>
+        </div>
+    </section>
+    <h1>Feliz primer mes, amor mio ❤💕</h1>
+    <script>
+        function toggleMessage(el) {
+            el.classList.toggle('collapsed');
+        }
+
+        document.querySelectorAll('.event').forEach((el, i) => {
+            el.style.animationDelay = `${i * 0.2}s`;
+        });
+    </script>
+</body>
+</html>
