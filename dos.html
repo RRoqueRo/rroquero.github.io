@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Universo | Roque & Zady - 2 Meses</title>
+    <style>
+        :root {
+            --verde-claro: #a8e6cf;
+            --verde-oscuro: #1fab89;
+            --azul-claro: #d4f1f9;
+            --azul-oscuro: #1e6f9f;
+            --texto: #333;
+            --fondo: #f9f9f9;
+            --card-bg: #ffffff;
+            --dorado: #FFD700;
+        }
+        
+        [data-theme="dark"] {
+            --verde-claro: #0a3d62;
+            --verde-oscuro: #079992;
+            --azul-claro: #1e3799;
+            --azul-oscuro: #4a69bd;
+            --texto: #f5f5f5;
+            --fondo: #121212;
+            --card-bg: #2d2d2d;
+            --dorado: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: var(--verde-oscuro);
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--texto);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--verde-oscuro);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Universo Ampliado */
+        .universe-container {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            min-height: 90vh;
+        }
+
+        .universe-title {
+            font-size: 2.8rem;
+            color: var(--azul-oscuro);
+            margin-bottom: 1rem;
+            animation: fadeIn 1s;
+        }
+
+        .month-counter {
+            font-size: 1.3rem;
+            color: var(--verde-oscuro);
+            margin-bottom: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .universe {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 80vh;
+            margin: 0 auto;
+            background: radial-gradient(ellipse at center, var(--azul-claro) 0%, var(--fondo) 70%);
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.5s;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0,0,0,0.7);
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        .planet:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 30px rgba(255,255,255,0.6);
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.6; transform: scale(1); }
+            to { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Easter Egg Mejorado */
+        .saturn-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+
+        .saturn-container.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .saturn-content {
+            text-align: center;
+            animation: scaleIn 0.5s;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .saturn {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+        .saturn-planet {
+            width: 180px;
+            height: 180px;
+            background: #F4D03F;
+            border-radius: 50%;
+            margin: 0 auto;
+            box-shadow: 0 0 40px rgba(244,208,63,0.5);
+        }
+
+        .saturn-rings {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 40px;
+            background: linear-gradient(to right, 
+                rgba(210,180,140,0.7) 0%,
+                rgba(255,215,0,0.8) 50%,
+                rgba(210,180,140,0.7) 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255,215,0,0.5);
+        }
+
+        .saturn-message {
+            color: var(--dorado);
+            margin-top: 30px;
+            font-size: 1.5rem;
+            text-align: center;
+            max-width: 400px;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+
+        /* Botones */
+        .back-button {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background-color: var(--verde-oscuro);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+        }
+
+        #theme-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--verde-oscuro);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .universe-title {
+                font-size: 2rem;
+            }
+            
+            .universe {
+                height: 60vh;
+                max-width: 95%;
+            }
+            
+            .planet {
+                width: 70px !important;
+                height: 70px !important;
+                font-size: 0.9rem;
+            }
+            
+            .saturn {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .saturn-planet {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .saturn-rings {
+                width: 200px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Roque & Zady's Universe</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="timeline.html">Linea del Tiempo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="universe-container">
+        <h1 class="universe-title">Nuestro Universo</h1>
+        <p class="month-counter">✨ 2 meses de amor infinito ✨</p>
+        
+        <div class="universe" id="universe">
+            <!-- Planetas -->
+            <div class="planet" style="width: 120px; height: 120px; background: #0066ff; top: 20%; left: 15%;" 
+                data-message="Tierra"></div>
+            <div class="planet" style="width: 80px; height: 80px; background: #d10404fa; top: 40%; left: 75%;" 
+                 data-message="Marte"></div>
+            <div class="planet" style="width: 100px; height: 100px; background: #7c2700; top: 70%; left: 25%;" 
+                 data-message="Venus"></div>
+        </div>
+    </div>
+
+    <!-- Easter Egg Saturno -->
+    <div class="saturn-container" id="saturnEgg">
+        <div class="saturn-content">
+            <div class="saturn">
+                <div class="saturn-planet"></div>
+                <div class="saturn-rings"></div>
+            </div>
+            <p class="saturn-message">
+                Para mi estrellita ✨<br>
+                "Tu amor es mi gravedad, siempre atraído hacia ti"
+
+                "No hay una sola estrella que no me recuerde a ti"
+            </p>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-button">← Inicio</a>
+    <button id="theme-toggle">🌓</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const universe = document.getElementById('universe');
+            const saturnEgg = document.getElementById('saturnEgg');
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            const planetMessages = {
+                'Tierra': "Donde nuestra historia comenzó 🌍",
+                'Marte': "Nuestro próximo destino de aventuras 🚀",
+                'Venus': "Brillas más que cualquier estrella ✨"
+            };
+
+            // Mostrar mensaje flotante
+            function showMessage(message) {
+                const messageBox = document.createElement('div');
+                messageBox.className = 'floating-message';
+                messageBox.innerHTML = `<p>${message}</p>`;
+                
+                document.body.appendChild(messageBox);
+                
+                setTimeout(() => {
+                    messageBox.style.opacity = '0';
+                    setTimeout(() => messageBox.remove(), 500);
+                }, 2500);
+            }
+
+            // Eventos para planetas
+            document.querySelectorAll('.planet').forEach(planet => {
+                planet.addEventListener('click', function() {
+                    const messageKey = this.getAttribute('data-message');
+                    showMessage(planetMessages[messageKey]);
+                });
+            });
+
+            // Easter Egg de Saturno
+            let clickCount = 0;
+            const secretStar = document.createElement('div');
+            secretStar.className = 'star secret-star';
+            secretStar.innerHTML = '🌟';
+            secretStar.style.cssText = `
+                position: absolute;
+                top: 12%;
+                right: 8%;
+                font-size: 2.5rem;
+                cursor: pointer;
+                filter: drop-shadow(0 0 10px gold);
+                animation: pulse 2.5s infinite;
+                z-index: 20;
+            `;
+            
+            secretStar.addEventListener('click', () => {
+                clickCount++;
+                if (clickCount >= 3) {
+                    saturnEgg.classList.add('visible');
+                    setTimeout(() => {
+                        saturnEgg.classList.remove('visible');
+                    }, 4000);
+                    clickCount = 0;
+                }
+            });
+            universe.appendChild(secretStar);
+
+            // Cerrar Easter Egg
+            saturnEgg.addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('visible');
+            });
+
+            // Sistema de tema
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Cargar tema guardado
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+
+            // Crear estrellas
+            function createStars() {
+                const starCount = 150;
+                
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.style.cssText = `
+                        width: ${Math.random() * 4 + 2}px;
+                        height: ${Math.random() * 4 + 2}px;
+                        top: ${Math.random() * 100}%;
+                        left: ${Math.random() * 100}%;
+                        animation-delay: ${Math.random() * 2}s;
+                        background: ${i % 5 === 0 ? 'var(--dorado)' : 
+                                   i % 3 === 0 ? 'var(--azul-claro)' : 
+                                   'var(--verde-claro)'};
+                        box-shadow: 0 0 ${Math.random() * 10 + 5}px currentColor;
+                    `;
+                    universe.appendChild(star);
+                }
+            }
+
+            // Animación de pulsación
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes pulse {
+                    0% { transform: scale(1); opacity: 0.8; }
+                    50% { transform: scale(1.3); opacity: 1; }
+                    100% { transform: scale(1); opacity: 0.8; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            createStars();
+        });
+    </script>
+</body>
+</html>

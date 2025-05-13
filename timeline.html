@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia | Roque & Zady's Blog</title>
+    <style>
+        :root {
+            --verde-claro: #a8e6cf;
+            --verde-oscuro: #1fab89;
+            --azul-claro: #d4f1f9;
+            --azul-oscuro: #1e6f9f;
+            --texto: #333;
+            --fondo: #f9f9f9;
+            --card-bg: #ffffff;
+        }
+        
+        [data-theme="dark"] {
+            --verde-claro: #0a3d62;
+            --verde-oscuro: #079992;
+            --azul-claro: #1e3799;
+            --azul-oscuro: #4a69bd;
+            --texto: #f5f5f5;
+            --fondo: #121212;
+            --card-bg: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.3s, color 0.2s;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: var(--verde-oscuro);
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--texto);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--verde-oscuro);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--verde-oscuro);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Timeline */
+        .timeline-section {
+            margin: 4rem 1rem 2rem;
+            padding: 2rem 1rem;
+            background-color: var(--card-bg);
+            border-top: 2px solid var(--verde-claro);
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+
+        .timeline-section h2 {
+            color: var(--verde-oscuro);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .event {
+            position: relative;
+            padding: 1.5rem 1rem;
+            border-left: 3px solid var(--verde-oscuro);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        .event .date {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--azul-oscuro);
+        }
+
+        .event .dot {
+            width: 15px;
+            height: 15px;
+            background-color: var(--verde-oscuro);
+            border-radius: 50%;
+            position: absolute;
+            left: -9px;
+            top: 1.6rem;
+            box-shadow: 0 0 0 3px var(--card-bg);
+        }
+
+        .message {
+            background-color: var(--azul-claro);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .message:hover {
+            background-color: var(--verde-claro);
+        }
+
+        .message.collapsed {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            background-color: var(--card-bg);
+            color: var(--texto);
+            width: 100%;
+        }
+
+        /* Botones de navegación */
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--verde-oscuro);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        #theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--verde-oscuro);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .timeline-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Roque & Zady's Blog</h1>    
+    </header>
+
+    <section class="timeline-section">
+        <h2>Nuestra historia</h2>
+        <div class="timeline">
+            <div class="event">
+                <div class="date">2020</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Todo empezó alrededor del 2020-2021 cuando decidí escribirte por WhatsApp... Estabámos cursando séptimo grado...
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">2021-2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                   Durante este tiempo, pasaron muchas cosas para ambos lados... pero siempre mantuvimos a amistad a pesar de todo... Sin dudas eras mi mejor amiga y siempre te quise a pesar de las boberias que le conté a tu madre con tal de que no descubrieran que en realidad si queria estar contigo...
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">16-17 Feb 2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Despues de tanto tiempo pude decir todo lo que sentia por ti... Que aunque la cerveza me haya ayudado un poquito a perder el miedo al rechazo... te lo tenia que decir ya cuanto antes, la verdad. De hecho además de recordar este dia como el dia en que te dije ¨Me gustas, Litzady¨, lo recuerdo porque decirtelo fue la mejor decision que he tomado en mi vida entera...
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">03 Mar 2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                  Recuerdo este dia como si fuera ayer, habiamos terminado de hablar con Rolando... un Lunes por la tarde, y pues fuimos casi todo lo que nos quedaba de esa tarde para el arbol de los deseos... nuestra primera cita oficial... la pasé demasiado bien ese dia y me sentí muy bien estando y hablando contigo ahi...
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">11 Mar 2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Nuestro primer beso... nunca pense que fuese a hacerlo pese a lo sucedido anteriormente esa semana... pero sucedió, y creeme que ha sido la mejor experiencia que tenido, y desde entonces, besarte es como un vicio, y tus labios la droga más poderosa que he visto. Sin dudas, esto es y será algo que nunca olvidaré. (Cabe destacar que desde entonces tus besos me saben a gloria...)
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">13 Mar 2025</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Luego de 2 dias despues del primer beso... ocurrió algo que me cambio la vida por completo. Sucedió lo que siempre soñé, y desde ese dia soy feliz. Finalmente estoy con la mujer que siempre soñé, y ahora que estoy contigo me resta hacerte feliz y amarte cada dia más... porque es lo que te mereces. TE AMO MUCHO MI AMOR ❤ ERES EL AMOR DE MI VIDA!!!!
+                </div>
+            </div>
+            <div class="event">
+                <div class="date">Futuro</div>
+                <div class="dot"></div>
+                <div class="message" onclick="toggleMessage(this)">
+                    Pasado, Presente, y Futuro. Tiempos gramaticales xdd, pero cada cual tiene su propio significado
+                    Pasado: simplemente pasó, realmente no hay nada que se pueda hacer por las cosas que hicimos, simplemente aceptarlas
+                    Presente: No es nada más que lo que vivimos, ese segundo que vives es el presente, ese regalo que tenemos todos y muchas veces no lo aprovechamos.
+                    Futuro: Es logico, es lo proximo al presente. Este tiempo es demasiado misterioso. Nadie sabe nunca que les pasará en el futuro y a veces hasta se preocupan... no es para más, Pero bueno... para mi, ese futuro lo tengo muy claro, y es estar contigo en toda su extencion. Por toda la vida y como te dije una vez, hasta que la muerte nos separe... Sabes estoy muy feliz de que mi futuro seas tu, eres lo que siempre quise... y ahora ya te tengo. De verdad, Te amo mas que a nada!!!!!!!!! 
+                    Y ahora un mensajito para el futuro: LITZADY NICOLAU EXPOSITO el dia que nos vayamos a casar, vuelve a esta pagina... quiero que observes todo lo que hemos vivido, y que en verdad sepas lo mucho que te amo ahora mismo... y espero que para ese entonces, yo ya no sea el anormal que conoces, y sea el hombre que siempre quisiste... Por ultimo, dile a Roman que lo amo(probablemente no haya nacido xd pero aqui estará esta web para que sepa mas de nosotros...)
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h1>Gracias por estar...❤💕</h1>
+    </footer>
+
+    <a href="index.html" class="back-button">← Inicio</a>
+    <button id="theme-toggle">🌓</button>
+
+    <script>
+        // Animación de eventos
+        function toggleMessage(el) {
+            el.classList.toggle('collapsed');
+        }
+
+        document.querySelectorAll('.event').forEach((el, i) => {
+            el.style.animationDelay = `${i * 0.2}s`;
+        });
+
+        // Toggle de tema
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Cargar tema guardado
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

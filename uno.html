@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para mi Titi | Roque & Zady's Blog</title>
+  <style>
+    :root {
+      --verde-claro: #a8e6cf;
+      --verde-oscuro: #1fab89;
+      --azul-claro: #d4f1f9;
+      --azul-oscuro: #1e6f9f;
+      --texto: #333;
+      --fondo: #f9f9f9;
+    }
+    
+    [data-theme="dark"] {
+      --verde-claro: #0a3d62;
+      --verde-oscuro: #079992;
+      --azul-claro: #1e3799;
+      --azul-oscuro: #4a69bd;
+      --texto: #f5f5f5;
+      --fondo: #121212;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, var(--verde-claro), var(--fondo));
+      color: var(--texto);
+      text-align: center;
+    }
+    .container {
+      padding: 3rem 1rem;
+    }
+
+    h1 {
+      animation: fadeIn 2s ease-in-out;
+      font-size: 2.5rem;
+      color: var(--verde-oscuro);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    p.love-note {
+      max-width: 600px;
+      margin: 2rem auto;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      background: var(--azul-claro);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .song-button {
+      display: inline-block;
+      margin: 1rem;
+      background-color: var(--verde-oscuro);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    
+    .song-button:hover {
+      background-color: var(--azul-oscuro);
+    }
+
+    .poema-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(169, 230, 207, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(31, 171, 137, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .poema-container::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--verde-oscuro), var(--azul-oscuro));
+    }
+    
+    .verso {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin: 0.8rem 0;
+      padding-left: 1rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.8s ease-out;
+      position: relative;
+    }
+    
+    .verso.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .verso::first-letter {
+      font-weight: bold;
+      color: var(--verde-oscuro);
+      font-size: 1.3em;
+    }
+    
+    @media (max-width: 600px) {
+      .poema-container {
+        padding: 1.5rem;
+      }
+      .verso {
+        font-size: 1rem;
+      }
+    }
+    
+    /* Botón de regreso */
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: var(--verde-oscuro);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+    
+    /* Toggle de tema */
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--verde-oscuro);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button">← Inicio</a>
+  <button id="theme-toggle">🌓</button>
+
+  <div class="container">
+    <h1>Feliz primer mes, Titi</h1>
+    <p class="love-note">
+      Desde que llegaste a mi vida, todo ha cambiado para mejor. Este primer mes contigo ha sido mágico, lleno de risas, aprendizajes y mucho amor. Gracias por ser mi refugio, por tu ternura, por tu fuerza y por cada detalle. Eres mi paz, mi risa, mi todo. Te amo, mami.
+    </p>
+  </div>
+
+  <div class="poema-container">
+    <div class="verso">Donde el tiempo se rinde a nuestro latir,</div>
+    <div class="verso">En tus ojos marrones hallo mi porvenir.</div>
+    <div class="verso">Juntos desde el séptimo, dos almas en vuelo,</div>
+    <div class="verso">Amigos primero, hoy nuestro amor es el cielo.</div>
+    <div class="verso">Mami, eres poesía hecha mujer,</div>
+    <div class="verso">Esencia divina que quiero comer.</div>
+    <div class="verso">Sin miedo a lo malo, abrazando lo bueno,</div>
+    <div class="verso">Eres mi eterno "para siempre", mi dulce veneno.</div>
+    <div class="verso">Recuerdo ese chat donde todo empezó...</div>
+    <div class="verso">Tus palabras fueron semillas de amor,</div>
+    <div class="verso">Un "hola" en WhatsApp que incendió mi interior.</div>
+    <div class="verso">Refugio en tu cuerpo, tu risa, tu encanto,</div>
+    <div class="verso">Eres el milagro que pintó mi quebranto.</div>
+    <div class="verso">Frases tan simples, pero nos hacen volar,</div>
+    <div class="verso">Un "papi", un "mami" que nunca pasarán.</div>
+    <div class="verso">Guardamos secretos que el tiempo no apaga,</div>
+    <div class="verso">Infinito amor que ni el viento amagara.</div>
+    <div class="verso">Oh, mi destino es ser tu cobijo cada día.</div>
+  </div>
+
+  <div>
+    <a class="song-button" href="https://youtu.be/Z1erSu_ikO0?si=ZlHoXKpIXrmbf6k4">
+      Nuestra Canción
+    </a>
+  </div>
+  
+  <h1 style="margin: 2rem;">TE AMO, MI ESTRELLITA ✨</h1>
+
+  <script>
+    // Animación de versos
+    document.addEventListener('DOMContentLoaded', function() {
+      const versos = document.querySelectorAll('.verso');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      versos.forEach(verso => observer.observe(verso));
+     
+      // Toggle de tema
+      const themeToggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+      
+      // Cargar tema guardado
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      html.setAttribute('data-theme', savedTheme);
+    });
+  </script>
+</body>
+</html>
+
